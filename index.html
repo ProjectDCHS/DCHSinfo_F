@@ -8,120 +8,80 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        /* 섹션 전환 애니메이션 */
-        .section {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        .section.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* 사용자 정의 스크롤바 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .section { display: none; animation: fadeIn 0.5s; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <!-- 헤더 및 네비게이션 -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600" data-section="home">
-                <i class="fas fa-school mr-2"></i>DCHSinfo
-            </a>
+            <a href="#" class="text-2xl font-bold text-blue-600" data-section="home"><i class="fas fa-school mr-2"></i>DCHSinfo</a>
             <div class="hidden md:flex items-center space-x-4">
                 <a href="#" class="text-gray-600 hover:text-blue-500 transition" data-section="home">홈</a>
-                <a href="#" class="text-gray-600 hover:text-blue-500 transition" data-section="notice">공지사항</a>
                 <a href="#" class="text-gray-600 hover:text-blue-500 transition" data-section="board">게시판</a>
                 <a href="#" class="text-gray-600 hover:text-blue-500 transition" data-section="meal">급식알리미</a>
                 <a href="http://comci.kr/st" target="_blank" class="text-gray-600 hover:text-blue-500 transition">시간표</a>
             </div>
             <div id="auth-links" class="hidden md:flex items-center space-x-2">
                 <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition" data-section="login">로그인</a>
-                <a href="#" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition" data-section="login">회원가입</a>
             </div>
-            <div id="user-profile" class="hidden md:flex items-center space-x-3">
-                <span id="user-email" class="text-sm font-medium"></span>
+            <div id="user-profile" class="hidden items-center space-x-3">
+                <span id="user-name" class="text-sm font-medium"></span>
                 <button id="logout-button" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm">로그아웃</button>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button id="mobile-menu-button" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
         </nav>
-        <!-- 모바일 메뉴 -->
         <div id="mobile-menu" class="hidden md:hidden bg-white">
             <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100" data-section="home">홈</a>
-            <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100" data-section="notice">공지사항</a>
             <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100" data-section="board">게시판</a>
             <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100" data-section="meal">급식알리미</a>
             <a href="http://comci.kr/st" target="_blank" class="block py-2 px-4 text-sm hover:bg-gray-100">시간표</a>
             <div id="mobile-auth-links" class="border-t mt-2 pt-2">
                  <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100" data-section="login">로그인</a>
-                 <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100" data-section="login">회원가입</a>
             </div>
              <div id="mobile-user-profile" class="hidden border-t mt-2 pt-2 px-4 py-2">
-                <span id="mobile-user-email" class="text-sm font-medium block mb-2"></span>
+                <span id="mobile-user-name" class="text-sm font-medium block mb-2"></span>
                 <button id="mobile-logout-button" class="w-full bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm">로그아웃</button>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-6">
-        <!-- 홈 섹션 -->
         <section id="home-section" class="section active">
             <div class="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div class="h-64 md:h-96 bg-cover bg-center rounded-lg mb-6" style="background-image: url('https://placehold.co/1200x400/3498db/ffffff?text=Ansan+Dongsan+High+School')">
-                </div>
+                <div class="h-64 md:h-96 bg-cover bg-center rounded-lg mb-6" style="background-image: url('https://dchs-1.s3.ap-northeast-2.amazonaws.com/AFCB14B9-6435-468D-9950-D4B398DCA873_1_102_.jpg');"></div>
                 <h1 class="text-4xl font-bold mb-2">안산동산고등학교에 오신 것을 환영합니다</h1>
                 <p class="text-gray-600 text-lg mb-8">미래를 향한 꿈과 열정이 가득한 곳, DCHSinfo와 함께하세요.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <a href="#" data-section="board" class="bg-blue-500 text-white p-6 rounded-lg hover:bg-blue-600 transition-transform hover:scale-105 flex items-center justify-center flex-col">
-                        <i class="fas fa-comments text-3xl mb-2"></i>
-                        <span class="font-semibold">게시판</span>
-                    </a>
-                    <a href="#" data-section="notice" class="bg-green-500 text-white p-6 rounded-lg hover:bg-green-600 transition-transform hover:scale-105 flex items-center justify-center flex-col">
-                        <i class="fas fa-bullhorn text-3xl mb-2"></i>
-                        <span class="font-semibold">공지사항</span>
+                        <i class="fas fa-comments text-3xl mb-2"></i><span class="font-semibold">게시판</span>
                     </a>
                     <a href="#" data-section="meal" class="bg-yellow-500 text-white p-6 rounded-lg hover:bg-yellow-600 transition-transform hover:scale-105 flex items-center justify-center flex-col">
-                        <i class="fas fa-utensils text-3xl mb-2"></i>
-                        <span class="font-semibold">오늘의 급식</span>
+                        <i class="fas fa-utensils text-3xl mb-2"></i><span class="font-semibold">오늘의 급식</span>
                     </a>
                     <a href="http://comci.kr/st" target="_blank" class="bg-purple-500 text-white p-6 rounded-lg hover:bg-purple-600 transition-transform hover:scale-105 flex items-center justify-center flex-col">
-                        <i class="fas fa-calendar-alt text-3xl mb-2"></i>
-                        <span class="font-semibold">시간표</span>
+                        <i class="fas fa-calendar-alt text-3xl mb-2"></i><span class="font-semibold">시간표</span>
+                    </a>
+                    <a href="#" data-section="login" class="bg-green-500 text-white p-6 rounded-lg hover:bg-green-600 transition-transform hover:scale-105 flex items-center justify-center flex-col">
+                        <i class="fas fa-sign-in-alt text-3xl mb-2"></i><span class="font-semibold">로그인</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 로그인/회원가입 섹션 -->
         <section id="login-section" class="section">
-             <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-md">
+            <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-md">
                 <div class="flex justify-center mb-6">
                     <button id="show-login-form" class="px-6 py-2 font-semibold text-blue-600 border-b-2 border-blue-600">로그인</button>
                     <button id="show-register-form" class="px-6 py-2 font-semibold text-gray-500">회원가입</button>
                 </div>
-
-                <!-- 로그인 폼 -->
                 <form id="login-form" class="space-y-4">
                     <h2 class="text-2xl font-bold text-center text-gray-800">로그인</h2>
                     <div>
@@ -133,12 +93,14 @@
                         <input type="password" id="login-password" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
                     </div>
                     <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition">로그인</button>
-                    <p id="login-error" class="text-red-500 text-sm text-center"></p>
+                    <p id="login-error" class="text-red-500 text-sm text-center h-4"></p>
                 </form>
-
-                <!-- 회원가입 폼 -->
                 <form id="register-form" class="hidden space-y-4">
                      <h2 class="text-2xl font-bold text-center text-gray-800">회원가입</h2>
+                    <div>
+                        <label for="register-username" class="block mb-1 font-medium">사용자명</label>
+                        <input type="text" id="register-username" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    </div>
                     <div>
                         <label for="register-email" class="block mb-1 font-medium">이메일</label>
                         <input type="email" id="register-email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
@@ -147,254 +109,434 @@
                         <label for="register-password" class="block mb-1 font-medium">비밀번호</label>
                         <input type="password" id="register-password" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
                     </div>
-                     <div>
-                        <label for="register-password-confirm" class="block mb-1 font-medium">비밀번호 확인</label>
-                        <input type="password" id="register-password-confirm" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
-                    </div>
                     <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition">회원가입</button>
-                    <p id="register-error" class="text-red-500 text-sm text-center"></p>
+                    <p id="register-error" class="text-red-500 text-sm text-center h-4"></p>
                 </form>
-
-                <!-- 소셜 로그인 -->
                 <div class="mt-6">
-                    <div class="relative">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="px-2 bg-white text-gray-500">또는</span>
-                        </div>
-                    </div>
+                    <div class="relative"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div><div class="relative flex justify-center text-sm"><span class="px-2 bg-white text-gray-500">또는</span></div></div>
                     <div class="mt-4 grid grid-cols-1 gap-3">
-                        <button id="google-login" class="w-full flex items-center justify-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                            <i class="fab fa-google text-red-500 mr-2"></i>
-                            <span class="font-medium">Google 계정으로 로그인</span>
-                        </button>
-                        <!-- 페이스북, 인스타그램 등 다른 소셜 로그인은 API 정책에 따라 구현이 복잡할 수 있습니다. -->
+                        <a id="google-login-button" href="#" class="w-full flex items-center justify-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                            <i class="fab fa-google text-red-500 mr-2"></i><span class="font-medium">Google 계정으로 시작</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 공지사항 섹션 (게시판과 유사, 읽기 전용) -->
-        <section id="notice-section" class="section">
-             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-3xl font-bold mb-6 border-b pb-4">공지사항</h2>
-                <!-- 공지사항 목록 -->
-                <div id="notice-list" class="space-y-4">
-                    <!-- 공지사항 아이템 예시 -->
-                    <div class="p-4 border rounded-lg hover:shadow-md transition cursor-pointer">
-                        <h3 class="font-bold text-lg text-blue-600">[중요] 2025학년도 학사일정 안내</h3>
-                        <p class="text-sm text-gray-500">2025.08.15 | 관리자</p>
-                    </div>
-                     <div class="p-4 border rounded-lg hover:shadow-md transition cursor-pointer">
-                        <h3 class="font-bold text-lg">여름방학 방과후학교 신청 안내</h3>
-                        <p class="text-sm text-gray-500">2025.08.10 | 관리자</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 게시판 섹션 -->
         <section id="board-section" class="section">
-             <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
                 <div class="flex justify-between items-center mb-6 border-b pb-4">
                     <h2 class="text-3xl font-bold">자유 게시판</h2>
-                    <button id="show-post-modal-button" class="bg-blue-500 text-white px-5 py-2 rounded-md hover:bg-blue-600 transition">
+                    <button id="show-post-modal-button" class="hidden bg-blue-500 text-white px-5 py-2 rounded-md hover:bg-blue-600 transition">
                         <i class="fas fa-pen mr-2"></i>글쓰기
                     </button>
                 </div>
-                <!-- 게시글 목록 -->
                 <div id="post-list" class="space-y-3">
-                   <!-- 게시글이 여기에 동적으로 추가됩니다. -->
                    <p class="text-gray-500 text-center py-10">게시글을 불러오는 중입니다...</p>
                 </div>
             </div>
         </section>
         
-        <!-- 글쓰기/상세보기 모달 -->
         <div id="post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
             <div class="bg-white rounded-lg shadow-xl w-11/12 md:w-2/3 lg:w-1/2 max-h-[90vh] flex flex-col">
-                <div class="p-5 border-b flex justify-between items-center">
-                    <h3 id="modal-title" class="text-2xl font-bold">새 글 작성</h3>
-                    <button id="close-modal-button" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-                </div>
-                <!-- 글쓰기 폼 -->
+                <div class="p-5 border-b flex justify-between items-center"><h3 id="modal-title" class="text-2xl font-bold">새 글 작성</h3><button id="close-modal-button" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button></div>
+                <div id="post-view" class="p-5 space-y-4 overflow-y-auto hidden"></div>
                 <form id="post-form" class="p-5 space-y-4 overflow-y-auto">
                     <input type="hidden" id="post-id">
-                    <div>
-                        <label for="post-title" class="block mb-1 font-medium">제목</label>
-                        <input type="text" id="post-title" class="w-full p-2 border rounded-md" required>
-                    </div>
-                    <div>
-                        <label for="post-content" class="block mb-1 font-medium">내용</label>
-                        <textarea id="post-content" rows="8" class="w-full p-2 border rounded-md" required></textarea>
-                    </div>
-                     <div class="text-right">
-                        <button type="submit" id="save-post-button" class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">저장</button>
-                    </div>
+                    <div><label for="post-title" class="block mb-1 font-medium">제목</label><input type="text" id="post-title" class="w-full p-2 border rounded-md" required></div>
+                    <div><label for="post-content" class="block mb-1 font-medium">내용</label><textarea id="post-content" rows="8" class="w-full p-2 border rounded-md" required></textarea></div>
+                    <div class="text-right"><button type="submit" id="save-post-button" class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">저장</button></div>
                 </form>
-                <!-- 글 상세보기 -->
-                <div id="post-view" class="p-5 space-y-4 overflow-y-auto hidden">
-                    <div id="post-detail-content">
-                        <!-- 선택된 게시글 내용 -->
-                    </div>
-                    <div class="border-t pt-4">
-                        <h4 class="font-bold text-lg mb-2">댓글</h4>
-                        <div id="comment-list" class="space-y-3 mb-4 max-h-48 overflow-y-auto">
-                            <!-- 댓글 목록 -->
-                        </div>
-                        <form id="comment-form" class="flex gap-2">
-                            <input type="text" id="comment-input" class="flex-grow p-2 border rounded-md" placeholder="댓글을 입력하세요..." required>
-                            <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-800">등록</button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
 
-
-        <!-- 급식 알리미 섹션 -->
         <section id="meal-section" class="section">
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-3xl font-bold mb-6 border-b pb-4 text-center">오늘의 급식</h2>
                 <div class="flex justify-center items-center mb-4">
                     <button id="prev-day" class="p-2 text-xl"><i class="fas fa-chevron-left"></i></button>
-                    <h3 id="meal-date" class="text-xl font-semibold mx-4"></h3>
+                    <h3 id="meal-date" class="text-xl font-semibold mx-4 w-48 text-center"></h3>
                     <button id="next-day" class="p-2 text-xl"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <div id="meal-content" class="min-h-[200px] bg-gray-50 p-6 rounded-lg flex items-center justify-center">
+                <div id="meal-content" class="min-h-[200px] bg-gray-50 p-6 rounded-lg flex items-center justify-center text-center">
                     <p class="text-gray-500">급식 정보를 불러오는 중입니다...</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- 알림 메시지 -->
     <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl opacity-0 translate-y-10 transition-all duration-300">
         <p id="toast-message"></p>
     </div>
 
-    <!-- Firebase SDK -->
     <script type="module">
-        // Firebase 구성은 다음 단계에서 추가됩니다.
-        // 여기에 Firebase 초기화 및 관련 로직이 들어갑니다.
+        // --- 1. CONFIGURATION ---
+        // -------------------------
+        // 로컬에서 테스트할 때는 'http://127.0.0.1:5000'
+        // Render에 배포한 후에는 실제 백엔드 서버 주소로 변경해야 합니다.
+        const API_BASE_URL = 'https://dchsinfo-b.onrender.com'; 
 
-        // --- UI 및 네비게이션 로직 ---
+        // --- 2. STATE MANAGEMENT ---
+        // ---------------------------
+        let state = {
+            currentUser: null, // 로그인한 사용자 정보 {id, username, email}
+            posts: [],         // 게시글 목록
+            currentPost: null, // 현재 보고 있는 게시글 상세 정보
+            currentMealDate: new Date()
+        };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('nav a[data-section], #home-section a[data-section], #mobile-menu a[data-section]');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+        // --- 3. UI SELECTORS ---
+        // -----------------------
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('a[data-section]');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        // --- 4. API CLIENT ---
+        // ---------------------
+        const api = {
+            async request(endpoint, options = {}) {
+                const url = `${API_BASE_URL}${endpoint}`;
+                const headers = { 'Content-Type': 'application/json', ...options.headers };
+                const config = {
+                    ...options,
+                    headers,
+                    credentials: 'include' // 세션 쿠키를 주고받기 위해 필수!
+                };
+                if (options.body) {
+                    config.body = JSON.stringify(options.body);
+                }
 
-            function showSection(sectionId) {
-                sections.forEach(section => {
-                    if (section.id === sectionId + '-section') {
-                        section.classList.add('active');
-                    } else {
-                        section.classList.remove('active');
+                try {
+                    const response = await fetch(url, config);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || response.statusText);
                     }
-                });
-                // 모바일 메뉴가 열려있으면 닫기
-                mobileMenu.classList.add('hidden');
-            }
+                    if (response.status === 204) return null; // No Content
+                    return response.json();
+                } catch (error) {
+                    showToast(error.message || '네트워크 오류가 발생했습니다.', 'error');
+                    throw error;
+                }
+            },
+            // Auth
+            checkAuthStatus: () => api.request('/api/auth/status'),
+            register: (username, email, password) => api.request('/api/auth/register', { method: 'POST', body: { username, email, password } }),
+            login: (email, password) => api.request('/api/auth/login', { method: 'POST', body: { email, password } }),
+            logout: () => api.request('/api/auth/logout', { method: 'POST' }),
+            // Posts
+            getPosts: () => api.request('/api/posts'),
+            getPostDetail: (postId) => api.request(`/api/posts/${postId}`),
+            createPost: (title, content) => api.request('/api/posts', { method: 'POST', body: { title, content } }),
+            deletePost: (postId) => api.request(`/api/posts/${postId}`, { method: 'DELETE' }),
+            // Comments
+            createComment: (postId, content) => api.request(`/api/posts/${postId}/comments`, { method: 'POST', body: { content } }),
+            // Meal
+            getMeal: (date) => api.request(`/api/meal?date=${date}`)
+        };
+
+        // --- 5. UI RENDERING & LOGIC ---
+        // -------------------------------
+        // 섹션 전환
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.toggle('active', section.id === `${sectionId}-section`);
+            });
+            mobileMenu.classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // Toast 알림
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toast.className = `fixed bottom-5 right-5 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 ${type === 'error' ? 'bg-red-600' : 'bg-gray-800'} opacity-100 translate-y-0`;
+            setTimeout(() => {
+                toast.className = toast.className.replace('opacity-100 translate-y-0', 'opacity-0 translate-y-10');
+            }, 3000);
+        }
+
+        // 인증 상태에 따른 UI 업데이트
+        function updateAuthUI() {
+            const loggedIn = !!state.currentUser;
             
+            document.getElementById('auth-links').style.display = loggedIn ? 'none' : 'flex';
+            document.getElementById('mobile-auth-links').style.display = loggedIn ? 'none' : 'block';
+            document.getElementById('user-profile').style.display = loggedIn ? 'flex' : 'none';
+            document.getElementById('mobile-user-profile').style.display = loggedIn ? 'block' : 'none';
+            document.getElementById('show-post-modal-button').style.display = loggedIn ? 'block' : 'none';
+
+            if (loggedIn) {
+                document.getElementById('user-name').textContent = `${state.currentUser.username}님`;
+                document.getElementById('mobile-user-name').textContent = `${state.currentUser.username}님`;
+            }
+        }
+
+        // 게시글 목록 렌더링
+        function renderPosts() {
+            const postList = document.getElementById('post-list');
+            if (state.posts.length === 0) {
+                postList.innerHTML = `<p class="text-gray-500 text-center py-10">아직 게시글이 없습니다.</p>`;
+                return;
+            }
+            postList.innerHTML = state.posts.map(post => `
+                <div class="p-4 border rounded-lg hover:shadow-md transition cursor-pointer" data-post-id="${post.id}">
+                    <h3 class="font-bold text-lg text-blue-600">${post.title}</h3>
+                    <p class="text-sm text-gray-500">작성자: ${post.author.username} | ${new Date(post.createdAt).toLocaleString()}</p>
+                </div>
+            `).join('');
+        }
+
+        // 게시글 상세 뷰 렌더링
+        function renderPostDetail() {
+            const postView = document.getElementById('post-view');
+            const post = state.currentPost;
+            if (!post) return;
+
+            const isAuthor = state.currentUser && state.currentUser.id === post.author.id;
+
+            postView.innerHTML = `
+                <div id="post-detail-content">
+                    <h2 class="text-3xl font-bold mb-2">${post.title}</h2>
+                    <p class="text-sm text-gray-500 mb-4">
+                        작성자: ${post.author.username} | ${new Date(post.createdAt).toLocaleString()}
+                        ${isAuthor ? `<button id="delete-post-button" class="ml-4 text-red-500 hover:underline">삭제</button>` : ''}
+                    </p>
+                    <div class="prose max-w-none text-gray-800 bg-gray-50 p-4 rounded-md min-h-[100px]">${post.content.replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="border-t pt-4 mt-4">
+                    <h4 class="font-bold text-lg mb-2">댓글 (${post.comments.length})</h4>
+                    <div id="comment-list" class="space-y-3 mb-4 max-h-48 overflow-y-auto">
+                        ${post.comments.length > 0 ? post.comments.map(comment => `
+                            <div class="bg-gray-100 p-3 rounded-md">
+                                <p class="text-sm"><strong>${comment.author.username}:</strong> ${comment.content}</p>
+                                <p class="text-xs text-gray-500 text-right">${new Date(comment.createdAt).toLocaleString()}</p>
+                            </div>
+                        `).join('') : '<p class="text-sm text-gray-500">첫 댓글을 작성해보세요.</p>'}
+                    </div>
+                    ${state.currentUser ? `
+                    <form id="comment-form" class="flex gap-2">
+                        <input type="text" id="comment-input" class="flex-grow p-2 border rounded-md" placeholder="댓글을 입력하세요..." required>
+                        <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-800">등록</button>
+                    </form>
+                    ` : '<p class="text-sm text-center text-gray-500">댓글을 작성하려면 <a href="#" data-section="login" class="text-blue-500">로그인</a>이 필요합니다.</p>'}
+                </div>
+            `;
+        }
+        
+        // 급식 정보 렌더링
+        async function renderMealInfo() {
+            const mealContent = document.getElementById('meal-content');
+            const mealDateEl = document.getElementById('meal-date');
+            
+            const dateStr = state.currentMealDate.toISOString().slice(0, 10).replace(/-/g, '');
+            mealDateEl.textContent = state.currentMealDate.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+            mealContent.innerHTML = `<p class="text-gray-500">급식 정보를 불러오는 중입니다...</p>`;
+            
+            try {
+                const data = await api.getMeal(dateStr);
+                if (data.menu) {
+                    mealContent.innerHTML = `
+                        <ul class="list-disc list-inside text-left space-y-2 text-lg">
+                            ${data.menu.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    mealContent.innerHTML = `<p class="text-gray-500">${data.message || '급식 정보가 없습니다.'}</p>`;
+                }
+            } catch (error) {
+                 mealContent.innerHTML = `<p class="text-red-500">급식 정보를 불러오는 데 실패했습니다.</p>`;
+            }
+        }
+        
+        // --- 6. EVENT LISTENERS ---
+        // --------------------------
+        function setupEventListeners() {
+            // 네비게이션
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const sectionId = link.dataset.section;
-                    showSection(sectionId);
+                    if (link.dataset.section) showSection(link.dataset.section);
                 });
             });
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
             // 로그인/회원가입 폼 전환
-            const loginForm = document.getElementById('login-form');
-            const registerForm = document.getElementById('register-form');
-            const showLoginFormBtn = document.getElementById('show-login-form');
-            const showRegisterFormBtn = document.getElementById('show-register-form');
+            const forms = { login: document.getElementById('login-form'), register: document.getElementById('register-form') };
+            const buttons = { login: document.getElementById('show-login-form'), register: document.getElementById('show-register-form') };
+            
+            function toggleForms(show) {
+                const hide = show === 'login' ? 'register' : 'login';
+                forms[show].classList.remove('hidden');
+                forms[hide].classList.add('hidden');
+                buttons[show].classList.add('text-blue-600', 'border-blue-600');
+                buttons[show].classList.remove('text-gray-500');
+                buttons[hide].classList.add('text-gray-500');
+                buttons[hide].classList.remove('text-blue-600', 'border-blue-600');
+            }
+            buttons.login.addEventListener('click', () => toggleForms('login'));
+            buttons.register.addEventListener('click', () => toggleForms('register'));
 
-            showLoginFormBtn.addEventListener('click', () => {
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-                showLoginFormBtn.classList.add('text-blue-600', 'border-blue-600');
-                showLoginFormBtn.classList.remove('text-gray-500');
-                showRegisterFormBtn.classList.add('text-gray-500');
-                showRegisterFormBtn.classList.remove('text-blue-600', 'border-blue-600');
+            // 폼 제출 핸들러
+            forms.login.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                document.getElementById('login-error').textContent = '';
+                try {
+                    const data = await api.login(email, password);
+                    state.currentUser = data.user;
+                    updateAuthUI();
+                    showToast('로그인 되었습니다!');
+                    showSection('home');
+                } catch (error) {
+                    document.getElementById('login-error').textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
+                }
             });
-            
-            showRegisterFormBtn.addEventListener('click', () => {
-                loginForm.classList.add('hidden');
-                registerForm.classList.remove('hidden');
-                showRegisterFormBtn.classList.add('text-blue-600', 'border-blue-600');
-                showRegisterFormBtn.classList.remove('text-gray-500');
-                showLoginFormBtn.classList.add('text-gray-500');
-                showLoginFormBtn.classList.remove('text-blue-600', 'border-blue-600');
+
+            forms.register.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('register-username').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                document.getElementById('register-error').textContent = '';
+                try {
+                    await api.register(username, email, password);
+                    showToast('회원가입 성공! 이제 로그인해주세요.');
+                    document.getElementById('login-email').value = email;
+                    toggleForms('login');
+                } catch (error) {
+                    document.getElementById('register-error').textContent = '오류가 발생했습니다. (이미 가입된 이메일일 수 있습니다)';
+                }
             });
+
+            // 로그아웃
+            document.getElementById('logout-button').addEventListener('click', handleLogout);
+            document.getElementById('mobile-logout-button').addEventListener('click', handleLogout);
+            async function handleLogout() {
+                try {
+                    await api.logout();
+                    state.currentUser = null;
+                    updateAuthUI();
+                    showToast('로그아웃 되었습니다.');
+                    showSection('home');
+                } catch (error) {}
+            }
             
-            // 글쓰기 모달 제어
+            // 구글 로그인
+            document.getElementById('google-login-button').href = `${API_BASE_URL}/api/auth/google`;
+
+            // 게시판
+            document.getElementById('post-list').addEventListener('click', async (e) => {
+                const postElement = e.target.closest('[data-post-id]');
+                if (postElement) {
+                    const postId = postElement.dataset.postId;
+                    try {
+                        state.currentPost = await api.getPostDetail(postId);
+                        renderPostDetail();
+                        openModal('view');
+                    } catch (error) {}
+                }
+            });
+
+            // 게시글 모달
             const postModal = document.getElementById('post-modal');
-            const showPostModalButton = document.getElementById('show-post-modal-button');
-            const closeModalButton = document.getElementById('close-modal-button');
-            const postForm = document.getElementById('post-form');
-            const postView = document.getElementById('post-view');
+            document.getElementById('show-post-modal-button').addEventListener('click', () => openModal('form'));
+            document.getElementById('close-modal-button').addEventListener('click', () => postModal.classList.add('hidden'));
 
-            showPostModalButton.addEventListener('click', () => {
+            function openModal(mode) { // 'form' or 'view'
+                document.getElementById('post-form').classList.toggle('hidden', mode !== 'form');
+                document.getElementById('post-view').classList.toggle('hidden', mode !== 'view');
+                if (mode === 'form') {
+                    document.getElementById('modal-title').textContent = '새 글 작성';
+                    document.getElementById('post-form').reset();
+                } else {
+                    document.getElementById('modal-title').textContent = '게시글 상세보기';
+                }
                 postModal.classList.remove('hidden');
-                postForm.classList.remove('hidden');
-                postView.classList.add('hidden');
-                postForm.reset();
-                document.getElementById('post-id').value = '';
-                document.getElementById('modal-title').textContent = '새 글 작성';
-            });
-            
-            closeModalButton.addEventListener('click', () => {
-                postModal.classList.add('hidden');
-            });
-
-            // 임시 급식 정보 로직
-            const mealDateEl = document.getElementById('meal-date');
-            const mealContentEl = document.getElementById('meal-content');
-            const prevDayBtn = document.getElementById('prev-day');
-            const nextDayBtn = document.getElementById('next-day');
-            let currentDate = new Date();
-
-            function formatDate(date) {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
             }
 
-            function displayDate(date) {
-                 const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-                 mealDateEl.textContent = date.toLocaleDateString('ko-KR', options);
-            }
-            
-            function fetchMeal() {
-                displayDate(currentDate);
-                mealContentEl.innerHTML = `<p class="text-gray-500">급식 정보를 불러오는 중입니다... (${formatDate(currentDate)})</p>`;
-                // 실제 API 호출은 다음 단계에서 구현합니다.
-            }
-
-            prevDayBtn.addEventListener('click', () => {
-                currentDate.setDate(currentDate.getDate() - 1);
-                fetchMeal();
-            });
-             nextDayBtn.addEventListener('click', () => {
-                currentDate.setDate(currentDate.getDate() + 1);
-                fetchMeal();
+            // 글쓰기 폼 제출
+            document.getElementById('post-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = document.getElementById('post-title').value;
+                const content = document.getElementById('post-content').value;
+                try {
+                    await api.createPost(title, content);
+                    postModal.classList.add('hidden');
+                    showToast('게시글이 등록되었습니다.');
+                    state.posts = await api.getPosts();
+                    renderPosts();
+                } catch (error) {}
             });
 
-            // 초기 급식 정보 로드
-            fetchMeal();
+            // 댓글, 삭제 등 동적 이벤트 위임
+            postModal.addEventListener('submit', async (e) => {
+                if (e.target.id === 'comment-form') {
+                    e.preventDefault();
+                    const content = document.getElementById('comment-input').value;
+                    try {
+                        const newComment = await api.createComment(state.currentPost.id, content);
+                        state.currentPost.comments.push(newComment);
+                        renderPostDetail(); // Re-render to show new comment
+                    } catch (error) {}
+                }
+            });
+            postModal.addEventListener('click', async (e) => {
+                if (e.target.id === 'delete-post-button') {
+                    if (confirm('정말로 이 게시글을 삭제하시겠습니까?')) {
+                        try {
+                            await api.deletePost(state.currentPost.id);
+                            postModal.classList.add('hidden');
+                            showToast('게시글이 삭제되었습니다.');
+                            state.posts = await api.getPosts(); // Refresh list
+                            renderPosts();
+                            showSection('board');
+                        } catch (error) {}
+                    }
+                }
+            });
 
-        }); // END DOMContentLoaded
+            // 급식
+            document.getElementById('prev-day').addEventListener('click', () => {
+                state.currentMealDate.setDate(state.currentMealDate.getDate() - 1);
+                renderMealInfo();
+            });
+            document.getElementById('next-day').addEventListener('click', () => {
+                state.currentMealDate.setDate(state.currentMealDate.getDate() + 1);
+                renderMealInfo();
+            });
+        }
+        
+        // --- 7. INITIALIZATION ---
+        // -------------------------
+        async function initialize() {
+            try {
+                const authStatus = await api.checkAuthStatus();
+                if (authStatus.isLoggedIn) {
+                    state.currentUser = authStatus.user;
+                }
+            } catch(e) {
+                console.error("인증 상태 확인 실패 (서버가 꺼져있을 수 있습니다)");
+            } finally {
+                updateAuthUI();
+            }
 
+            try {
+                state.posts = await api.getPosts();
+                renderPosts();
+            } catch (e) {
+                document.getElementById('post-list').innerHTML = `<p class="text-red-500 text-center py-10">게시글을 불러오는 데 실패했습니다.</p>`;
+            }
+
+            renderMealInfo();
+            setupEventListeners();
+            showSection('home');
+        }
+
+        document.addEventListener('DOMContentLoaded', initialize);
     </script>
 </body>
 </html>
